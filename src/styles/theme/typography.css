@@ -1,0 +1,54 @@
+@utility h900 {
+  @apply text-[72px] font-bold leading-[108px];
+  font-family: var(--font-manrope);
+}
+@utility h800 {
+  @apply text-[56px] font-bold leading-[72px];
+  font-family: var(--font-manrope);
+}
+@utility h700 {
+  @apply text-[40px] font-bold leading-[60px];
+  font-family: var(--font-manrope);
+}
+@utility h600 {
+  @apply text-[32px] font-bold leading-[48px] tracking-[-1px];
+  font-family: var(--font-manrope);
+}
+@utility h500 {
+  @apply text-[24px] font-bold leading-[36px];
+  font-family: var(--font-manrope);
+}
+@utility h400 {
+  @apply text-[20px] font-bold leading-[32px];
+  font-family: var(--font-manrope);
+}
+@utility h300 {
+  @apply text-base font-semibold leading-[24px];
+  font-family: var(--font-manrope);
+}
+@utility h200 {
+  @apply text-sm font-semibold leading-[20px];
+  font-family: var(--font-manrope);
+}
+@utility h100 {
+  @apply text-xs font-semibold leading-4;
+  font-family: var(--font-manrope);
+}
+
+@utility subtitle {
+  @apply text-[20px] font-medium leading-[32px];
+  font-family: var(--font-manrope);
+}
+
+@utility body-large {
+  @apply text-base font-medium leading-[24px] tracking-[0.2px];
+  font-family: var(--font-manrope);
+}
+@utility body-medium {
+  @apply text-sm font-medium leading-[20px] tracking-[0.2px];
+  font-family: var(--font-manrope);
+}
+@utility body-small {
+  @apply text-xs font-medium leading-4 tracking-[0.2px];
+  font-family: var(--font-manrope);
+}
