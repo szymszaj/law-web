@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "mainPage": "Strona główna",
+    "about": "O kancelarii",
+    "practiceAreas": "Specjalizacje",
+    "team": "Zespół",
+    "contact": "Kontakt"
+  },
+  "common": {
+    "readMore": "Czytaj więcej",
+    "contactUs": "Skontaktuj się",
+    "learnMore": "Dowiedz się więcej"
+  },
+  "footer": {
+    "rights": "Wszelkie prawa zastrzeżone",
+    "privacyPolicy": "Polityka prywatności"
+  }
+}
