@@ -1,33 +1,36 @@
+/* DISPLAY / NAGŁÓWKI — serif (Fraunces) */
 @utility h900 {
-  @apply text-[72px] font-bold leading-[108px];
-  font-family: var(--font-manrope);
+  @apply text-[56px] font-medium leading-[1.04] tracking-[-0.02em] lg:text-[88px];
+  font-family: var(--font-fraunces);
 }
 @utility h800 {
-  @apply text-[56px] font-bold leading-[72px];
-  font-family: var(--font-manrope);
+  @apply text-[44px] font-medium leading-[1.05] tracking-[-0.02em] lg:text-[64px];
+  font-family: var(--font-fraunces);
 }
 @utility h700 {
-  @apply text-[40px] font-bold leading-[60px];
-  font-family: var(--font-manrope);
+  @apply text-[34px] font-medium leading-[1.08] tracking-[-0.01em] lg:text-[48px];
+  font-family: var(--font-fraunces);
 }
 @utility h600 {
-  @apply text-[32px] font-bold leading-[48px] tracking-[-1px];
-  font-family: var(--font-manrope);
+  @apply text-[28px] font-semibold leading-[1.15] tracking-[-0.01em] lg:text-[34px];
+  font-family: var(--font-fraunces);
 }
 @utility h500 {
-  @apply text-[24px] font-bold leading-[36px];
-  font-family: var(--font-manrope);
+  @apply text-[22px] font-semibold leading-[1.25] lg:text-[26px];
+  font-family: var(--font-fraunces);
 }
+
+/* UI / LABELE — sans (Manrope) */
 @utility h400 {
-  @apply text-[20px] font-bold leading-[32px];
+  @apply text-[20px] font-semibold leading-[1.4];
   font-family: var(--font-manrope);
 }
 @utility h300 {
-  @apply text-base font-semibold leading-[24px];
+  @apply text-base font-semibold leading-[1.5];
   font-family: var(--font-manrope);
 }
 @utility h200 {
-  @apply text-sm font-semibold leading-[20px];
+  @apply text-sm font-semibold leading-[1.4];
   font-family: var(--font-manrope);
 }
 @utility h100 {
@@ -35,20 +38,26 @@
   font-family: var(--font-manrope);
 }
 
-@utility subtitle {
-  @apply text-[20px] font-medium leading-[32px];
+/* ETYKIETA / EYEBROW — wersaliki */
+@utility eyebrow {
+  @apply text-xs font-semibold uppercase leading-4 tracking-[0.18em];
   font-family: var(--font-manrope);
 }
 
+/* TEKST */
+@utility subtitle {
+  @apply text-[19px] font-normal leading-[1.6] lg:text-[21px];
+  font-family: var(--font-manrope);
+}
 @utility body-large {
-  @apply text-base font-medium leading-[24px] tracking-[0.2px];
+  @apply text-base font-normal leading-[1.7] tracking-[0.1px];
   font-family: var(--font-manrope);
 }
 @utility body-medium {
-  @apply text-sm font-medium leading-[20px] tracking-[0.2px];
+  @apply text-sm font-normal leading-[1.6] tracking-[0.1px];
   font-family: var(--font-manrope);
 }
 @utility body-small {
-  @apply text-xs font-medium leading-4 tracking-[0.2px];
+  @apply text-xs font-normal leading-[1.5] tracking-[0.1px];
   font-family: var(--font-manrope);
 }

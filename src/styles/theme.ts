@@ -14,7 +14,10 @@ export type Breakpoints = typeof breakpoints
 export type Breakpoint = keyof Breakpoints
 
 export const colors = {
-  primary: '#004470',
+  ink: '#181410',
+  brown: '#4a3326',
+  gold: '#a87e4b',
+  cream: '#f6f1e9',
   black: '#000000',
   white: '#ffffff',
 } as const

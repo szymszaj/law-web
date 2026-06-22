@@ -33,17 +33,26 @@
 }
 
 html {
-  @apply text-gray100 scroll-smooth;
+  @apply text-text scroll-smooth;
 
   overflow-x: hidden;
+  scroll-padding-top: 96px;
 }
 
 body {
-  @apply bg-[#FBFBFE] overscroll-none;
+  @apply bg-cream text-text overscroll-none;
+  font-family: var(--font-manrope);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-cream);
 }
 
 .section-container {
-  @apply px-5 py-10 lg:px-[60px] lg:py-20 max-w-[1440px] mx-auto;
+  @apply px-5 py-16 lg:px-[60px] lg:py-28 max-w-[1320px] mx-auto;
 }
 
 @theme inline {
