@@ -6,7 +6,6 @@ import { Link } from '../Link'
 import { ButtonVariant } from './types'
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-  scrollTop?: boolean
   href?: string
   size?: 'small' | 'medium'
   variant?: ButtonVariant
@@ -14,113 +13,87 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   iconDirection?: 'left' | 'right'
 }
 
+const sizeClasses: Record<
+  NonNullable<ButtonProps['size']>,
+  { withText: string; iconOnly: string; text: string; icon: number }
+> = {
+  medium: { withText: 'h-12 px-7 gap-2.5', iconOnly: 'h-12 w-12', text: 'h300', icon: 18 },
+  small: { withText: 'h-10 px-5 gap-2', iconOnly: 'h-10 w-10', text: 'h200', icon: 16 },
+}
+
+const variantClasses: Record<ButtonVariant, string> = {
+  [ButtonVariant.PRIMARY]:
+    'bg-ink text-on-dark border border-ink hover:bg-cognac hover:border-cognac',
+  [ButtonVariant.SECONDARY]:
+    'bg-transparent text-ink border border-ink/30 hover:border-ink hover:bg-ink hover:text-on-dark',
+  [ButtonVariant.LIGHT]:
+    'bg-cream text-ink border border-cream hover:bg-gold-soft hover:border-gold-soft',
+}
+
 const Button = ({
   children,
   className = '',
   type = 'button',
   size = 'medium',
-  onClick,
   href,
   Icon,
-  iconDirection = 'left',
+  iconDirection = 'right',
   variant = ButtonVariant.PRIMARY,
   disabled,
   ...rest
 }: ButtonProps) => {
   const hasText = React.Children.count(children) > 0
+  const s = sizeClasses[size]
 
-  const baseClasses = cn(
-    'inline-flex items-center justify-center rounded-[8px] transition-all duration-200 cursor-pointer outline-none w-fit border',
+  const classes = cn(
+    'group inline-flex items-center justify-center rounded-full w-fit cursor-pointer outline-none',
+    'transition-all duration-300 ease-out hover:-translate-y-0.5',
     iconDirection === 'left' ? 'flex-row' : 'flex-row-reverse',
-
-    hasText
-      ? size === 'medium'
-        ? 'px-[23px] py-[11px] h300 gap-3 h-12'
-        : 'px-[19px] py-[9px] h200 gap-2 h-10'
-      : size === 'medium'
-        ? 'p-[11px]'
-        : 'p-[9px]',
-
-    disabled && 'bg-gray05! text-gray60! cursor-not-allowed border-transparent'
+    hasText ? s.withText : s.iconOnly,
+    hasText && s.text,
+    disabled
+      ? 'pointer-events-none border-transparent bg-line text-muted'
+      : variantClasses[variant],
+    className
   )
 
-  const getVariantClasses = () => {
-    if (disabled) return baseClasses
-
-    switch (variant) {
-      case ButtonVariant.SECONDARY:
-        return cn(
-          baseClasses,
-          'bg-primary0 text-primary50 border border-transparent hover:border-primary0 hover:border-primary50 '
-        )
-      case ButtonVariant.PRIMARY:
-      default:
-        return cn(
-          baseClasses,
-          'bg-primary100 text-white border border-primary100 hover:border-buttonHover hover:bg-buttonHover '
-        )
-    }
-  }
-
-  const buttonClassName = cn(getVariantClasses(), className)
-  const iconSize = size === 'medium' ? 20 : 16
-
-  const renderContent = () => {
-    const isComponent = Icon && typeof Icon !== 'string'
-    const isStringPath = typeof Icon === 'string'
-
-    const iconWrapperClasses = 'p-0.5 flex items-center justify-center shrink-0'
+  const renderIcon = () => {
+    if (!Icon) return null
+    const isComponent = typeof Icon !== 'string'
 
     return (
-      <>
-        {isComponent && (
-          <div className={iconWrapperClasses}>
-            <Icon
-              width={iconSize}
-              height={iconSize}
-              className="transition-colors"
-              fill="currentColor"
-            />
-          </div>
+      <span className="flex shrink-0 items-center justify-center transition-transform duration-300 group-hover:translate-x-0.5">
+        {isComponent ? (
+          <Icon width={s.icon} height={s.icon} fill="currentColor" />
+        ) : (
+          <img src={Icon} alt="" width={s.icon} height={s.icon} className="object-contain" />
         )}
-
-        {isStringPath && (
-          <div className={iconWrapperClasses}>
-            <img
-              src={Icon}
-              alt=""
-              style={{ width: iconSize, height: iconSize }}
-              className="object-contain"
-            />
-          </div>
-        )}
-
-        {hasText && (
-          <span className="leading-none" suppressHydrationWarning>
-            {children}
-          </span>
-        )}
-      </>
+      </span>
     )
   }
 
-  const commonProps = {
-    className: buttonClassName,
-    onClick,
-    ...rest,
-  }
+  const content = (
+    <>
+      {renderIcon()}
+      {hasText && (
+        <span className="leading-none" suppressHydrationWarning>
+          {children}
+        </span>
+      )}
+    </>
+  )
 
   if (href) {
     return (
-      <Link to={href} {...(commonProps as any)}>
-        {renderContent()}
+      <Link to={href} className={classes} {...(rest as any)}>
+        {content}
       </Link>
     )
   }
 
   return (
-    <button type={type} disabled={disabled} {...commonProps}>
-      {renderContent()}
+    <button type={type} className={classes} disabled={disabled} {...rest}>
+      {content}
     </button>
   )
 }
