@@ -2,76 +2,70 @@
 
 import { motion } from 'motion/react'
 
-import { Button } from '@/components/atoms/Button'
-import { ButtonVariant } from '@/components/atoms/Button'
+import { Button, ButtonVariant } from '@/components/atoms/Button'
+
+import { fadeUp, stagger } from '@/utils/animations'
 
 import { HeroProps } from './types'
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.1,
-    },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const },
-  },
-}
-
 export const Hero = ({
+  eyebrow,
   title,
+  titleAccent,
   subtitle,
-  features,
   primaryBtn,
   secondaryBtn,
-}: HeroProps) => {
-  return (
-    <section className="section-container flex min-h-[80vh] flex-col justify-center">
+  stats,
+}: HeroProps) => (
+  <section className="relative overflow-hidden bg-cream">
+    {/* delikatny akcent tła */}
+    <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-gold-soft/20 blur-3xl" />
+
+    <div className="section-container relative flex min-h-[88vh] flex-col justify-center">
       <motion.div
-        variants={container}
+        variants={stagger(0.14, 0.1)}
         initial="hidden"
         animate="show"
-        className="flex max-w-3xl flex-col gap-6"
+        className="flex max-w-4xl flex-col gap-7"
       >
-        <motion.h1 variants={item} className="h800 text-gray100">
-          {title}
+        <motion.span
+          variants={fadeUp}
+          className="eyebrow flex items-center gap-3 text-gold"
+        >
+          <span className="h-px w-10 bg-gold" />
+          {eyebrow}
+        </motion.span>
+
+        <motion.h1 variants={fadeUp} className="h900 text-ink">
+          {title}{' '}
+          <span className="text-cognac italic">{titleAccent}</span>
         </motion.h1>
 
-        <motion.p variants={item} className="subtitle max-w-2xl text-gray60">
+        <motion.p variants={fadeUp} className="subtitle max-w-2xl text-muted">
           {subtitle}
         </motion.p>
 
-        {features.length > 0 && (
-          <motion.ul variants={item} className="flex flex-wrap gap-3">
-            {features.map((feature) => (
-              <li
-                key={feature}
-                className="body-medium rounded-full bg-primary0 px-4 py-2 text-primary50"
-              >
-                {feature}
-              </li>
-            ))}
-          </motion.ul>
-        )}
-
-        <motion.div variants={item} className="mt-2 flex flex-wrap gap-4">
+        <motion.div variants={fadeUp} className="mt-2 flex flex-wrap gap-4">
           <Button href={primaryBtn.href}>{primaryBtn.label}</Button>
           <Button href={secondaryBtn.href} variant={ButtonVariant.SECONDARY}>
             {secondaryBtn.label}
           </Button>
         </motion.div>
+
+        <motion.dl
+          variants={fadeUp}
+          className="mt-10 flex flex-wrap gap-x-12 gap-y-6 border-t border-line pt-8"
+        >
+          {stats.map((stat) => (
+            <div key={stat.label} className="flex flex-col gap-1">
+              <dt className="h600 text-ink">{stat.value}</dt>
+              <dd className="body-medium text-muted">{stat.label}</dd>
+            </div>
+          ))}
+        </motion.dl>
       </motion.div>
-    </section>
-  )
-}
+    </div>
+  </section>
+)
 
 export default Hero

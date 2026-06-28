@@ -1,7 +1,11 @@
+type Cta = { label: string; href?: string }
+
 export type HeroProps = {
+  eyebrow: string
   title: string
+  titleAccent: string
   subtitle: string
-  features: string[]
-  primaryBtn: { label: string; href?: string }
-  secondaryBtn: { label: string; href?: string }
+  primaryBtn: Cta
+  secondaryBtn: Cta
+  stats: { value: string; label: string }[]
 }
