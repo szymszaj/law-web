@@ -18,7 +18,6 @@ export const Hero = ({
   stats,
 }: HeroProps) => (
   <section className="relative overflow-hidden bg-cream">
-    {/* delikatny akcent tła */}
     <div className="pointer-events-none absolute -right-40 -top-40 h-[520px] w-[520px] rounded-full bg-gold-soft/20 blur-3xl" />
 
     <div className="section-container relative flex min-h-[88vh] flex-col justify-center">
@@ -37,8 +36,7 @@ export const Hero = ({
         </motion.span>
 
         <motion.h1 variants={fadeUp} className="h900 text-ink">
-          {title}{' '}
-          <span className="text-cognac italic">{titleAccent}</span>
+          {title} <span className="text-cognac italic">{titleAccent}</span>
         </motion.h1>
 
         <motion.p variants={fadeUp} className="subtitle max-w-2xl text-muted">
